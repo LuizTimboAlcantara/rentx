@@ -19,3 +19,59 @@ export const Header = styled.View`
 export const CarImages = styled.View`
   margin-top: ${getStatusBarHeight() + RFValue(32)}px;
 `;
+
+export const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    padding: 24,
+    alignItems: "center",
+  },
+  showsVerticalSrollIndicator: false,
+})``;
+
+export const Details = styled.View`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: ${RFValue(38)}px;
+`;
+
+export const Description = styled.View``;
+
+export const Brand = styled.Text`
+  font-size: ${RFValue(10)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  color: ${({ theme }) => theme.colors.text_detail};
+
+  text-transform: uppercase;
+`;
+
+export const Name = styled.Text`
+  font-size: ${RFValue(25)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  color: ${({ theme }) => theme.colors.title};
+`;
+
+export const Rent = styled.View``;
+
+export const Period = styled.Text`
+  font-size: ${RFValue(10)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  color: ${({ theme }) => theme.colors.text_detail};
+
+  text-transform: uppercase;
+`;
+
+export const Price = styled.Text`
+  font-size: ${RFValue(25)}px;
+  font-family: ${({ theme }) => theme.fonts.secondary_500};
+  color: ${({ theme }) => theme.colors.main};
+`;
+
+export const About = styled.Text`
+  font-size: ${RFValue(15)}px;
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.text};
+  text-align: justify;
+  margin-top: ${RFValue(23)}px;
+`;
