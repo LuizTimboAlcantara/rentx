@@ -68,6 +68,15 @@ export const Price = styled.Text`
   color: ${({ theme }) => theme.colors.main};
 `;
 
+export const Accessories = styled.View`
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: ${RFValue(16)}px;
+`;
+
 export const About = styled.Text`
   font-size: ${RFValue(15)}px;
   font-family: ${({ theme }) => theme.fonts.primary_400};
