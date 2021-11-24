@@ -3,7 +3,7 @@ import { RectButtonProps } from "react-native-gesture-handler";
 
 import { CarDTO } from "../../dtos/carDTO";
 
-import GasolineSvg from "../../assets/gasoline.svg";
+import { GetAccessoryIcon } from "../../utils/getAccessoryIcon";
 
 interface Props extends RectButtonProps {
   data: CarDTO;
@@ -23,6 +23,8 @@ import {
 } from "./styles";
 
 export function Car({ data, ...rest }: Props) {
+  const MotorIcon = GetAccessoryIcon(data.fuel_type);
+
   return (
     <Container {...rest}>
       <Details>
@@ -35,7 +37,7 @@ export function Car({ data, ...rest }: Props) {
           </Rent>
 
           <Type>
-            <GasolineSvg />
+            <MotorIcon />
           </Type>
         </About>
       </Details>
