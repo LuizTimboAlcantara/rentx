@@ -18,20 +18,13 @@ export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const carData = {
-    brand: "Audi",
-    name: "Rs 5 Coupé",
-    rent: {
-      period: "Ao dia",
-      price: 120,
-    },
-    thumbnail: "https://freepngimg.com/thumb/audi/35227-5-audi-rs5-red.png",
-  };
-
-  function handleCarDetails() {
+  function handleCarDetails(car: CarDTO) {
     navigation.dispatch(
       CommonActions.navigate({
         name: "CarDetails",
+        params: {
+          car: car,
+        },
       })
     );
   }
@@ -72,7 +65,9 @@ export function Home() {
         <CarList
           keyExtractor={(item) => item.id}
           data={cars}
-          renderItem={({ item }) => <Car data={item} onPress={handleCarDetails} />}
+          renderItem={({ item }) => (
+            <Car data={item} onPress={() => handleCarDetails(item)} />
+          )}
         />
       )}
     </Container>
