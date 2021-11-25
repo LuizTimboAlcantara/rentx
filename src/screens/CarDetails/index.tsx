@@ -40,6 +40,9 @@ export function CarDetails() {
     navigation.dispatch(
       CommonActions.navigate({
         name: "Scheduling",
+        params: {
+          car: car,
+        },
       })
     );
   }

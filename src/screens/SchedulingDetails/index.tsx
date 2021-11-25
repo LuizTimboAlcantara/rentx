@@ -54,10 +54,14 @@ export function SchedulingDetails() {
     );
   }
 
+  function handleBack() {
+    navigation.dispatch(CommonActions.goBack());
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>
