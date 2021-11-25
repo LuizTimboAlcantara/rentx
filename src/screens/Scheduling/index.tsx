@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar, Alert } from "react-native";
+import { StatusBar } from "react-native";
 import { CommonActions, useNavigation, useRoute } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
@@ -52,19 +52,15 @@ export function Scheduling() {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
   function handleConfirmRental() {
-    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      Alert.alert("Selecione o intervalo para alugar.");
-    } else {
-      navigation.dispatch(
-        CommonActions.navigate({
-          name: "SchedulingDetails",
-          params: {
-            car: car,
-            dates: Object.keys(markedDates),
-          },
-        })
-      );
-    }
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "SchedulingDetails",
+        params: {
+          car: car,
+          dates: Object.keys(markedDates),
+        },
+      })
+    );
   }
 
   function handleBack() {
@@ -129,7 +125,11 @@ export function Scheduling() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" onPress={handleConfirmRental} />
+        <Button
+          title="Confirmar"
+          onPress={handleConfirmRental}
+          enabled={!!rentalPeriod.startFormatted}
+        />
       </Footer>
     </Container>
   );
