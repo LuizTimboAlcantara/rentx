@@ -45,11 +45,7 @@ export function CarDetails() {
   }
 
   function handleBack() {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "Home",
-      })
-    );
+    navigation.dispatch(CommonActions.goBack());
   }
 
   return (
