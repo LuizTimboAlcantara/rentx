@@ -15,8 +15,8 @@ export const Container = styled(RectButton)<ButtonProps>`
   padding: ${RFValue(19)}px;
   align-items: center;
   justify-content: center;
-
   background-color: ${({ color }) => color};
+  margin-bottom: ${RFValue(8)}px;
 `;
 
 export const Title = styled.Text<ButtonTextProps>`

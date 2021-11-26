@@ -4,7 +4,7 @@ import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
-  padding: ${RFValue(24)}px;
+  padding: 0 ${RFValue(24)}px;
   background-color: ${({ theme }) => theme.colors.background_primary};
 `;
 
@@ -25,6 +25,11 @@ export const SubTitle = styled.Text`
   color: ${({ theme }) => theme.colors.text};
   line-height: ${RFValue(25)}px;
   margin-top: ${RFValue(16)}px;
+`;
+
+export const Form = styled.View`
+  width: 100%;
+  margin: ${RFValue(64)}px 0;ƒ
 `;
 
 export const Footer = styled.View``;
