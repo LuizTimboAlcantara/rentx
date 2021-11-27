@@ -29,7 +29,7 @@ export const SubTitle = styled.Text`
 
 export const Form = styled.View`
   width: 100%;
-  margin: ${RFValue(64)}px 0;ƒ
+  margin: ${RFValue(64)}px 0;
 `;
 
 export const Footer = styled.View``;
