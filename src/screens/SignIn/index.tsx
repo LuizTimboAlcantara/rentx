@@ -7,6 +7,7 @@ import {
   Keyboard,
 } from "react-native";
 import * as Yup from "yup";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -16,6 +17,7 @@ import { useTheme } from "styled-components";
 import { Container, Header, Title, SubTitle, Form, Footer } from "./styles";
 
 export function SignIn() {
+  const navigation = useNavigation();
   const theme = useTheme();
 
   const [email, setEmail] = useState("");
@@ -38,6 +40,14 @@ export function SignIn() {
         Alert.alert("Erro na autenticação!");
       }
     }
+  }
+
+  function handleNewAccount() {
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "FirstStep",
+      })
+    );
   }
 
   return (
@@ -84,8 +94,8 @@ export function SignIn() {
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {}}
-              enabled={false}
+              onPress={handleNewAccount}
+              enabled={true}
               loading={false}
               color={theme.colors.background_secondary}
               light
