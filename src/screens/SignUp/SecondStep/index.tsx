@@ -8,9 +8,10 @@ import { CommonActions, useNavigation } from "@react-navigation/native";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
-import { Input } from "../../../components/Input";
+import { InputPassword } from "../../../components/InputPassword";
 import { Button } from "../../../components/Button";
 
+import { useTheme } from "styled-components";
 import {
   Container,
   Header,
@@ -21,19 +22,12 @@ import {
   FormTitle,
 } from "./styles";
 
-export function FirstStep() {
+export function SecondStep() {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   function handleBack() {
     navigation.dispatch(CommonActions.goBack());
-  }
-
-  function handleNextStep() {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "SecondStep",
-      })
-    );
   }
 
   return (
@@ -55,18 +49,14 @@ export function FirstStep() {
           </SubTitle>
 
           <Form>
-            <FormTitle>1. Dados</FormTitle>
+            <FormTitle>2. Senha</FormTitle>
 
-            <Input iconName="user" placeholder="Nome" />
-            <Input
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-            />
-            <Input iconName="credit-card" placeholder="CNH" keyboardType="numeric" />
+            <InputPassword iconName="lock" placeholder="Senha" />
+
+            <InputPassword iconName="lock" placeholder="Repetir Senha" />
           </Form>
 
-          <Button title="Próximo" enabled={true} onPress={handleNextStep} />
+          <Button title="Cadastrar" enabled={true} color={theme.colors.success} />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
