@@ -138,7 +138,11 @@ export function CarDetails() {
       </Animated.ScrollView>
 
       <Footer>
-        <Button title="Escolher período do aluguel" onPress={handleConfirmRental} />
+        <Button
+          title="Escolher período do aluguel"
+          enabled={true}
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );

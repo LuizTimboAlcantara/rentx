@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { CommonActions, useNavigation, useRoute } from "@react-navigation/native";
 
+import { Confirmation } from "../../Confirmation";
+
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
 import { InputPassword } from "../../../components/InputPassword";
@@ -52,6 +54,17 @@ export function SecondStep() {
     if (password != passwordConfirm) {
       return Alert.alert("As senhas não são iguais!");
     }
+
+    navigation.dispatch(
+      CommonActions.navigate({
+        name: "Confirmation",
+        params: {
+          title: "Conta criada!",
+          message: `Agora é só fazer o login${"\n"}é aproveitar!`,
+          nextSceneRoute: "SignIn",
+        },
+      })
+    );
   }
 
   return (
