@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import * as Yup from "yup";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -24,16 +26,40 @@ import {
 export function FirstStep() {
   const navigation = useNavigation();
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [driverLicense, setDriverLicense] = useState("");
+
   function handleBack() {
     navigation.dispatch(CommonActions.goBack());
   }
 
-  function handleNextStep() {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "SecondStep",
-      })
-    );
+  async function handleNextStep() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required("CNH é obrigatória."),
+        email: Yup.string()
+          .email("E-mail inválido.")
+          .required("O e-mail é obrigatório."),
+        name: Yup.string().required("O nome é obrigatório."),
+      });
+
+      const data = { name, email, driverLicense };
+      await schema.validate(data);
+
+      navigation.dispatch(
+        CommonActions.navigate({
+          name: "SecondStep",
+          params: {
+            user: data,
+          },
+        })
+      );
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert("Opa", error.message);
+      }
+    }
   }
 
   return (
@@ -57,13 +83,30 @@ export function FirstStep() {
           <Form>
             <FormTitle>1. Dados</FormTitle>
 
-            <Input iconName="user" placeholder="Nome" />
+            <Input
+              iconName="user"
+              placeholder="Nome"
+              onChangeText={setName}
+              value={name}
+            />
             <Input
               iconName="mail"
               placeholder="E-mail"
               keyboardType="email-address"
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={setEmail}
+              value={email}
             />
-            <Input iconName="credit-card" placeholder="CNH" keyboardType="numeric" />
+            <Input
+              iconName="credit-card"
+              placeholder="CNH"
+              keyboardType="numeric"
+              onChangeText={setDriverLicense}
+              value={driverLicense}
+              //! Se fosse do tipo number!
+              // onChangeText={(value) => setDriverLicense(Number(value))}
+            />
           </Form>
 
           <Button title="Próximo" enabled={true} onPress={handleNextStep} />

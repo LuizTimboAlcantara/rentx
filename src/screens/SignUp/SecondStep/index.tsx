@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
+  Alert,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { CommonActions, useNavigation } from "@react-navigation/native";
+import { CommonActions, useNavigation, useRoute } from "@react-navigation/native";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -22,12 +23,35 @@ import {
   FormTitle,
 } from "./styles";
 
+interface Params {
+  user: {
+    name: string;
+    email: string;
+    driverLicense: string;
+  };
+}
+
 export function SecondStep() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { user } = route.params as Params;
   const theme = useTheme();
+
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   function handleBack() {
     navigation.dispatch(CommonActions.goBack());
+  }
+
+  function handleRegister() {
+    if (!password || !passwordConfirm) {
+      return Alert.alert("Informe a senha e a confirmação!");
+    }
+
+    if (password != passwordConfirm) {
+      return Alert.alert("As senhas não são iguais!");
+    }
   }
 
   return (
@@ -51,12 +75,27 @@ export function SecondStep() {
           <Form>
             <FormTitle>2. Senha</FormTitle>
 
-            <InputPassword iconName="lock" placeholder="Senha" />
+            <InputPassword
+              iconName="lock"
+              placeholder="Senha"
+              onChangeText={setPassword}
+              value={password}
+            />
 
-            <InputPassword iconName="lock" placeholder="Repetir Senha" />
+            <InputPassword
+              iconName="lock"
+              placeholder="Repetir Senha"
+              onChangeText={setPasswordConfirm}
+              value={passwordConfirm}
+            />
           </Form>
 
-          <Button title="Cadastrar" enabled={true} color={theme.colors.success} />
+          <Button
+            title="Cadastrar"
+            enabled={true}
+            color={theme.colors.success}
+            onPress={handleRegister}
+          />
         </Container>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
