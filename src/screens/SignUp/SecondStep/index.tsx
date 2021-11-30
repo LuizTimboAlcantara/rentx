@@ -5,9 +5,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
+import api from "../../../services/api";
 import { CommonActions, useNavigation, useRoute } from "@react-navigation/native";
-
-import { Confirmation } from "../../Confirmation";
 
 import { BackButton } from "../../../components/BackButton";
 import { Bullet } from "../../../components/Bullet";
@@ -46,7 +45,7 @@ export function SecondStep() {
     navigation.dispatch(CommonActions.goBack());
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !passwordConfirm) {
       return Alert.alert("Informe a senha e a confirmação!");
     }
@@ -55,16 +54,29 @@ export function SecondStep() {
       return Alert.alert("As senhas não são iguais!");
     }
 
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "Confirmation",
-        params: {
-          title: "Conta criada!",
-          message: `Agora é só fazer o login${"\n"}é aproveitar!`,
-          nextSceneRoute: "SignIn",
-        },
+    await api
+      .post("/users", {
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense,
+        password,
       })
-    );
+      .then(() => {
+        navigation.dispatch(
+          CommonActions.navigate({
+            name: "Confirmation",
+            params: {
+              title: "Conta criada!",
+              message: `Agora é só fazer o login${"\n"}é aproveitar!`,
+              nextSceneRoute: "SignIn",
+            },
+          })
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert("Não foi possível cadastrar!");
+      });
   }
 
   return (

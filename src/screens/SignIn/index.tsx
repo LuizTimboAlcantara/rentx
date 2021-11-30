@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import * as Yup from "yup";
 import { CommonActions, useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
@@ -17,6 +18,8 @@ import { useTheme } from "styled-components";
 import { Container, Header, Title, SubTitle, Form, Footer } from "./styles";
 
 export function SignIn() {
+  const { signIn } = useAuth();
+
   const navigation = useNavigation();
   const theme = useTheme();
 
@@ -33,6 +36,8 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
+
+      signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("Opa!", error.message);
@@ -89,7 +94,7 @@ export function SignIn() {
             <Button
               title="Login"
               onPress={handleSingIn}
-              enabled={false}
+              enabled={true}
               loading={false}
             />
             <Button

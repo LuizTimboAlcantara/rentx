@@ -1,5 +1,7 @@
 import React from "react";
 import AppLoading from "expo-app-loading";
+import { AppProvider } from "./src/hooks";
+
 import { ThemeProvider } from "styled-components";
 import theme from "./src/styles/theme";
 import {
@@ -30,7 +32,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <AppProvider>
+        <Routes />
+      </AppProvider>
     </ThemeProvider>
   );
 }
