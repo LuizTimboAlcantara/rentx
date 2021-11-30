@@ -37,29 +37,29 @@ export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const positionY = useSharedValue(0);
-  const positionX = useSharedValue(0);
+  // const positionY = useSharedValue(0);
+  // const positionX = useSharedValue(0);
 
-  const myCarButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: positionX.value }, { translateY: positionY.value }],
-    };
-  });
+  // const myCarButtonStyle = useAnimatedStyle(() => {
+  //   return {
+  //     transform: [{ translateX: positionX.value }, { translateY: positionY.value }],
+  //   };
+  // });
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart(_, ctx: any) {
-      ctx.positionX = positionX.value;
-      ctx.positionY = positionY.value;
-    },
-    onActive(event, ctx: any) {
-      positionX.value = event.translationX + event.translationX;
-      positionY.value = event.translationY + event.translationY;
-    },
-    onEnd() {
-      positionX.value = withSpring(0);
-      positionY.value = withSpring(0);
-    },
-  });
+  // const onGestureEvent = useAnimatedGestureHandler({
+  //   onStart(_, ctx: any) {
+  //     ctx.positionX = positionX.value;
+  //     ctx.positionY = positionY.value;
+  //   },
+  //   onActive(event, ctx: any) {
+  //     positionX.value = event.translationX + event.translationX;
+  //     positionY.value = event.translationY + event.translationY;
+  //   },
+  //   onEnd() {
+  //     positionX.value = withSpring(0);
+  //     positionY.value = withSpring(0);
+  //   },
+  // });
 
   function handleCarDetails(car: CarDTO) {
     navigation.dispatch(
@@ -72,13 +72,13 @@ export function Home() {
     );
   }
 
-  function handleOpenMyCar() {
-    navigation.dispatch(
-      CommonActions.navigate({
-        name: "MyCars",
-      })
-    );
-  }
+  // function handleOpenMyCar() {
+  //   navigation.dispatch(
+  //     CommonActions.navigate({
+  //       name: "MyCars",
+  //     })
+  //   );
+  // }
 
   useEffect(() => {
     async function fetchCars() {
@@ -96,12 +96,12 @@ export function Home() {
     fetchCars();
   }, []);
 
-  useEffect(() => {
-    //! Android -> Não voltar para a tela de splash;
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  }, []);
+  // useEffect(() => {
+  //   //! Android -> Não voltar para a tela de splash;
+  //   BackHandler.addEventListener("hardwareBackPress", () => {
+  //     return true;
+  //   });
+  // }, []);
 
   return (
     <Container>
@@ -129,7 +129,7 @@ export function Home() {
         />
       )}
 
-      <PanGestureHandler onGestureEvent={onGestureEvent}>
+      {/* <PanGestureHandler onGestureEvent={onGestureEvent}>
         <Animated.View
           style={[myCarButtonStyle, { position: "absolute", bottom: 13, right: 22 }]}
         >
@@ -140,17 +140,17 @@ export function Home() {
             <Ionicons name="ios-car-sport" size={32} color={theme.colors.shape} />
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
     </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+// const styles = StyleSheet.create({
+//   button: {
+//     width: 60,
+//     height: 60,
+//     borderRadius: 30,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   },
+// });
