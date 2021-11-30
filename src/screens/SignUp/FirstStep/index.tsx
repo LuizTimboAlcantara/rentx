@@ -22,12 +22,9 @@ import {
   Form,
   FormTitle,
 } from "./styles";
-import { useAuth } from "../../../hooks/auth";
 
 export function FirstStep() {
   const navigation = useNavigation();
-  const { user } = useAuth();
-  console.log(user);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

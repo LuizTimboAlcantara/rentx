@@ -21,10 +21,10 @@ export function StackRoutes() {
         headerShown: false,
       }}
     >
+      <Screen name="Home" component={Home} options={{ gestureEnabled: false }} />
       <Screen name="SignIn" component={SignIn} />
       <Screen name="FirstStep" component={FirstStep} />
       <Screen name="SecondStep" component={SecondStep} />
-      <Screen name="Home" component={Home} options={{ gestureEnabled: false }} />
       <Screen name="CarDetails" component={CarDetails} />
       <Screen name="Scheduling" component={Scheduling} />
       <Screen name="SchedulingDetails" component={SchedulingDetails} />
